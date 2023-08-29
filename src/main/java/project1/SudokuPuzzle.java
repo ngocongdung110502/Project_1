@@ -10,15 +10,15 @@ public class SudokuPuzzle {
 
     //kích thước của các hộp con trong bảng
     private final int BoxWidth;
-    private final int BoxWeight;
+    private final int BoxHeight;
 
     //Mảng chứa giá trị hợp lệ
     private final String [] ValidValues;
 
-    public SudokuPuzzle(int rows, int columns, int boxWeight, int boxWidth, String[] validValues){
+    public SudokuPuzzle(int rows, int columns, int boxHeight, int boxWidth, String[] validValues){
         this.Rows = rows;
         this.Columns = columns;
-        this.BoxWeight = boxWeight;
+        this.BoxHeight = boxHeight;
         this.BoxWidth = boxWidth;
         this.ValidValues = validValues;
         this.board = new String[Rows][Columns];
@@ -31,7 +31,7 @@ public class SudokuPuzzle {
         this.Rows = puzzle.Rows;
         this.Columns = puzzle.Columns;
         this.BoxWidth = puzzle.BoxWidth;
-        this.BoxWeight = puzzle.BoxWeight;
+        this.BoxHeight = puzzle.BoxHeight;
         this.ValidValues = puzzle.ValidValues;
         this.board = new String[Rows][Columns];
         for(int r = 0; r < Rows; r ++){
@@ -59,8 +59,8 @@ public class SudokuPuzzle {
         return this.BoxWidth;
     }
 
-    public int getBoxWeight(){
-        return this.BoxWeight;
+    public int getBoxHeight(){
+        return this.BoxHeight;
     }
 
     public String[] getValidValues(){
@@ -111,13 +111,13 @@ public class SudokuPuzzle {
 
     public boolean numInBox(int row, int col, String value){
         if(this.inRange(row, col)){
-            int boxRow = row/this.BoxWeight;
+            int boxRow = row/this.BoxHeight;
             int boxCol = col/this.BoxWidth;
 
-            int startingRow = (boxRow*this.BoxWeight);
+            int startingRow = (boxRow*this.BoxHeight);
             int startingCol = (boxCol*this.BoxWidth);
 
-            for(int r = startingRow; r <= (startingRow+this.BoxWeight)-1; r++){
+            for(int r = startingRow; r <= (startingRow+this.BoxHeight)-1; r++){
                 for(int c = startingCol; c <= (startingCol+this.BoxWidth)-1; c++){
                     if(this.board[r][c].equals(value)){
                         return true;
