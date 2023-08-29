@@ -16,7 +16,7 @@ public enum SudokuPuzzleType {
     private final String desc;
 
     //Khởi tạo (construstor)
-    private SudokuPuzzleType(int rows,int columns,int boxWidth,int boxHeight,String [] validValues,String desc) {
+    SudokuPuzzleType(int rows,int columns,int boxWidth,int boxHeight,String [] validValues,String desc) {
         this.rows = rows;
         this.columns = columns;
         this.boxWidth = boxWidth;

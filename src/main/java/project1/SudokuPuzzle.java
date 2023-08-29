@@ -35,13 +35,13 @@ public class SudokuPuzzle {
         this.ValidValues = puzzle.ValidValues;
         this.board = new String[Rows][Columns];
         for(int r = 0; r < Rows; r ++){
-            for(int c = 0; r < Columns; c++){
+            for(int c = 0; c < Columns; c++){
                 board[r][c] = puzzle.board[r][c];
             }
         }
         this.mutable = new boolean[Rows][Columns];
         for(int r = 0; r < Rows; r ++){
-            for(int c = 0; r < Columns; c++){
+            for(int c = 0; c < Columns; c++){
                 this.mutable[r][c] = puzzle.mutable[r][c];
             }
         }
