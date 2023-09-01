@@ -23,9 +23,9 @@ public class SudokuGenerator {
 
         backtrackSudokuSolver(0,0, copy);
 
-        //Xác định số lượng cần giữ lại trong trò chơi cần được giải quyết.
+        //Xác định số lượng cần giữ lại trong trò chơi cần được giải quyết để tạo mức độ (level)
         //Số lược giữ lại được tính bằng cách nhân tỉ lệ 0.2222 với tổng số ô
-        int numberOfValuesToKeep = (int)(0.2222*(copy.getNumRows()*copy.getNumRows()));
+        int numberOfValuesToKeep = (int)(0.3*(copy.getNumRows()*copy.getNumRows()));
 
         for(int i = 0; i < numberOfValuesToKeep;){
             int randomRow = randomGenerator.nextInt(puzzle.getNumRows());

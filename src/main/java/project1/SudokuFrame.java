@@ -21,19 +21,21 @@ public class SudokuFrame extends JFrame {
         JMenu newGame = new JMenu("New Game");
         JMenuItem sixBySixGame = new JMenuItem("6 By 6 Game");
         sixBySixGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXBYSIX, 30));
-        JMenuItem nineBynineGame = new JMenuItem(("9 By 9 Game"));
-        nineBynineGame.addActionListener(new NewGameListener(SudokuPuzzleType.NINEBYNINE, 26));
+        JMenuItem nineByNineGame = new JMenuItem(("9 By 9 Game"));
+        nineByNineGame.addActionListener(new NewGameListener(SudokuPuzzleType.NINEBYNINE, 26));
         JMenuItem twelveByTwelveGame = new JMenuItem("12 By 12 Game");
         twelveByTwelveGame.addActionListener(new NewGameListener(SudokuPuzzleType.TWELVEBYTWELVE,20));
-        /*
-         JMenuItem sixteenBySixteenGame = new JMenuItem("16 By 16 Game");
+        JMenuItem sixteenBySixteenGame = new JMenuItem("16 By 16 Game");
 		sixteenBySixteenGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXTEENBYSIXTEEN,16));
-         */
 
         newGame.add(sixBySixGame);
-        newGame.add(nineBynineGame);
+        newGame.add(nineByNineGame);
         newGame.add(twelveByTwelveGame);
-        //newGame.add(sixteenBySixteenGame);
+        newGame.add(sixteenBySixteenGame);
+
+        JMenu level = new JMenu("Level");
+        JMenuItem easy = new JMenuItem("Easy");
+
 
         file.add(newGame);
         menuBar.add(file);
