@@ -35,9 +35,17 @@ public class SudokuFrame extends JFrame {
 
         JMenu level = new JMenu("Level");
         JMenuItem easy = new JMenuItem("Easy");
+        JMenuItem medium = new JMenuItem("Medium");
+        JMenuItem hard = new JMenuItem("Hard");
+        JMenuItem expert = new JMenuItem("Expert");
 
+        level.add(easy);
+        level.add(medium);
+        level.add(hard);
+        level.add(expert);
 
         file.add(newGame);
+        file.add(level);
         menuBar.add(file);
         this.setJMenuBar(menuBar);
 
