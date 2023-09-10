@@ -11,6 +11,8 @@ public class SudokuFrame extends JFrame {
     private JPanel buttonSelectionPanel;
     private SudokuPanel sudokuPanel;
 
+    private SudokuLevel level;
+
     public SudokuFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Sudoku");
@@ -35,9 +37,13 @@ public class SudokuFrame extends JFrame {
 
         JMenu level = new JMenu("Level");
         JMenuItem easy = new JMenuItem("Easy");
+        easy.addActionListener(new LevelListener(SudokuLevel.EASY));
         JMenuItem medium = new JMenuItem("Medium");
+        medium.addActionListener(new LevelListener(SudokuLevel.MEDIUM));
         JMenuItem hard = new JMenuItem("Hard");
+        hard.addActionListener(new LevelListener(SudokuLevel.HARD));
         JMenuItem expert = new JMenuItem("Expert");
+        expert.addActionListener(new LevelListener(SudokuLevel.EXPERT));
 
         level.add(easy);
         level.add(medium);
@@ -62,11 +68,11 @@ public class SudokuFrame extends JFrame {
         windowPanel.add(buttonSelectionPanel);
         this.add(windowPanel);
 
-        rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26);
+        rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, SudokuLevel.EASY);
     }
 
-    public void rebuildInterface(SudokuPuzzleType puzzleType, int fontSize){
-        SudokuPuzzle generatedPuzzle = new SudokuGenerator().generateRandomSudoku(puzzleType);
+    public void rebuildInterface(SudokuPuzzleType puzzleType, int fontSize, SudokuLevel level){
+        SudokuPuzzle generatedPuzzle = new SudokuGenerator().generateRandomSudoku(puzzleType, level);
         sudokuPanel.newSudokuPuzzle(generatedPuzzle);
         sudokuPanel.setFontSize(fontSize);
         buttonSelectionPanel.removeAll();
@@ -94,7 +100,21 @@ public class SudokuFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event){
-            rebuildInterface(puzzleType, fontSize);
+            rebuildInterface(puzzleType, fontSize, SudokuLevel.EASY);
+        }
+    }
+
+    public class LevelListener implements ActionListener{
+        private SudokuLevel level;
+
+        public LevelListener(SudokuLevel level){
+            this.level = level;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent event){
+            SudokuFrame.this.level = this.level;
+            rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, level);
         }
     }
 

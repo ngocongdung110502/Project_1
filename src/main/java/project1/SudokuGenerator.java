@@ -6,7 +6,7 @@ import java.util.*;
 public class SudokuGenerator {
 
     //Tạo ra một trò chơi Sudoku ngẫu nhiên dựa trên loại trò chơi đã cho
-    public SudokuPuzzle generateRandomSudoku(SudokuPuzzleType puzzleType){
+    public SudokuPuzzle generateRandomSudoku(SudokuPuzzleType puzzleType, SudokuLevel level){
         SudokuPuzzle puzzle = new SudokuPuzzle(puzzleType.getRows(), puzzleType.getColumns(), puzzleType.getBoxWidth(), puzzleType.getBoxHeight(), puzzleType.getValidValues());
         SudokuPuzzle copy = new SudokuPuzzle(puzzle); //tạo một bản sao của bản gốc
 
@@ -25,7 +25,24 @@ public class SudokuGenerator {
 
         //Xác định số lượng cần giữ lại trong trò chơi cần được giải quyết để tạo mức độ (level)
         //Số lược giữ lại được tính bằng cách nhân tỉ lệ 0.2222 với tổng số ô
-        int numberOfValuesToKeep = (int)(0.3*(copy.getNumRows()*copy.getNumRows()));
+//        int numberOfValuesToKeep = (int)(0.3*(copy.getNumRows()*copy.getNumRows()));
+        int numberOfValuesToKeep;
+        switch(level){
+            case EASY:
+                numberOfValuesToKeep = (int)(0.5 * (copy.getNumRows() * copy.getNumRows()));
+                break;
+            case MEDIUM:
+                numberOfValuesToKeep = (int)(0.4 * (copy.getNumRows() * copy.getNumRows()));
+                break;
+            case HARD:
+                numberOfValuesToKeep = (int)(0.3 * (copy.getNumRows() * copy.getNumRows()));
+                break;
+            case EXPERT:
+                numberOfValuesToKeep = (int)(0.2 * (copy.getNumRows() * copy.getNumRows()));
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid Level: " + level);
+        }
 
         for(int i = 0; i < numberOfValuesToKeep;){
             int randomRow = randomGenerator.nextInt(puzzle.getNumRows());
