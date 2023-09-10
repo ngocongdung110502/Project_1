@@ -64,9 +64,6 @@ public class SudokuPanel extends JPanel {
         int slotHeight = this.getHeight()/puzzle.getNumRows();
 
         //Tính toán kích thước thực tế được sử dụng để vẽ bảng Sudoku
-//        usedHeight = (this.getHeight()/puzzle.getNumRows())*puzzle.getNumRows();
-//        usedWidth = (this.getWidth()/puzzle.getNumColumns())*puzzle.getNumColumns();
-        //Cách khác
         usedHeight = slotHeight*puzzle.getNumRows();
         usedWidth = slotWidth*puzzle.getNumColumns();
 

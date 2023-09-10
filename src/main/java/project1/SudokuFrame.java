@@ -11,12 +11,38 @@ public class SudokuFrame extends JFrame {
     private JPanel buttonSelectionPanel;
     private SudokuPanel sudokuPanel;
 
-    private SudokuLevel level;
+    //Các biến để lưu trữ kích thước và mức độ trò chơi hiện tại
+    private SudokuPuzzleType currentPuzzleType;
+    private SudokuLevel currentLevel;
+
+    public int calculateFontSize() {
+        int baseFontSize;
+
+        switch (currentPuzzleType) {
+            case SIXBYSIX:
+                baseFontSize = 30;
+                return baseFontSize;
+            case NINEBYNINE:
+                baseFontSize = 26;
+                return baseFontSize;
+            case TWELVEBYTWELVE:
+                baseFontSize = 20;
+                return baseFontSize;
+//            case SIXTEENBYSIXTEEN:
+//                baseFontSize = 16;
+//                return baseFontSize;
+            default:
+                throw new IllegalArgumentException("Invalid Puzzle Type: " + currentPuzzleType);
+        }
+    }
 
     public SudokuFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Sudoku");
         this.setMinimumSize(new Dimension(800, 600));
+
+        currentPuzzleType = SudokuPuzzleType.NINEBYNINE;
+        currentLevel = SudokuLevel.EASY;
 
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("Game");
@@ -27,13 +53,13 @@ public class SudokuFrame extends JFrame {
         nineByNineGame.addActionListener(new NewGameListener(SudokuPuzzleType.NINEBYNINE, 26));
         JMenuItem twelveByTwelveGame = new JMenuItem("12 By 12 Game");
         twelveByTwelveGame.addActionListener(new NewGameListener(SudokuPuzzleType.TWELVEBYTWELVE,20));
-        JMenuItem sixteenBySixteenGame = new JMenuItem("16 By 16 Game");
-		sixteenBySixteenGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXTEENBYSIXTEEN,16));
+//        JMenuItem sixteenBySixteenGame = new JMenuItem("16 By 16 Game");
+//		sixteenBySixteenGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXTEENBYSIXTEEN,16));
 
         newGame.add(sixBySixGame);
         newGame.add(nineByNineGame);
         newGame.add(twelveByTwelveGame);
-        newGame.add(sixteenBySixteenGame);
+//        newGame.add(sixteenBySixteenGame);
 
         JMenu level = new JMenu("Level");
         JMenuItem easy = new JMenuItem("Easy");
@@ -100,7 +126,9 @@ public class SudokuFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event){
-            rebuildInterface(puzzleType, fontSize, SudokuLevel.EASY);
+            currentPuzzleType = puzzleType;
+            currentLevel = SudokuLevel.EASY;
+            rebuildInterface(currentPuzzleType, fontSize, currentLevel);
         }
     }
 
@@ -113,8 +141,9 @@ public class SudokuFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event){
-            SudokuFrame.this.level = this.level;
-            rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, level);
+            int fontSize = calculateFontSize();
+            currentLevel = level;
+            rebuildInterface(currentPuzzleType, fontSize, currentLevel);
         }
     }
 
