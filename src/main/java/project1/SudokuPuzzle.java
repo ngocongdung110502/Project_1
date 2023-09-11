@@ -185,11 +185,11 @@ public class SudokuPuzzle {
         if (this.isSlotAvailable(row, col)) {
             for (String value : this.ValidValues) {
                 if (this.isValidMove(row, col, value)) {
-                    return "A valid value for this cell could be: " + value;
+                    return "Giá trị hợp lệ cho ô này có thể là: " + value;
                 }
             }
         }
-        return "No hints available for this cell.";
+        return "Không có gợi ý nào cho ô này.";
     }
 
     //Trả về một biểu diễn chuỗi của bảng Sudoku

@@ -15,6 +15,10 @@ public class SudokuFrame extends JFrame {
     private SudokuPuzzleType currentPuzzleType;
     private SudokuLevel currentLevel;
 
+    //Số lần gợi ý
+    private int hintsUsed = 0;
+    private static final int MAX_HINTS = 5;
+
     public int calculateFontSize() {
         int baseFontSize;
 
@@ -79,7 +83,17 @@ public class SudokuFrame extends JFrame {
         eraseCell.addActionListener(new EraseCellListener());
 
         JMenuItem hint = new JMenuItem("Hint");
-        hint.addActionListener(new HintListener());
+        hint.addActionListener(new HintListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (hintsUsed < MAX_HINTS) {
+                    sudokuPanel.showHintForCurrentCell();
+                    hintsUsed++;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Bạn đã hết lượt gợi ý.");
+                }
+            }
+        });
 
         JMenu file = new JMenu("Game");
         file.add(newGame);

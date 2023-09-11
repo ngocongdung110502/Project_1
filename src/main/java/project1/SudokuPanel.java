@@ -135,11 +135,17 @@ public class SudokuPanel extends JPanel {
         }
     }
 
+    //Gợi ý cho ô được chọn
     public void showHintForCurrentCell() {
         if (currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
             String hint = puzzle.getHint(currentlySelectedRow, currentlySelectedColumn);
             JOptionPane.showMessageDialog(null, "Hint: " + hint);
         }
+    }
+
+    //Kiểm tra xem ô đã đầy chưa
+    public boolean isBoardFull() {
+        return puzzle.boardFull();
     }
 
     public void messageFromNumActionListener(String buttonValue){
