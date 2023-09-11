@@ -127,6 +127,14 @@ public class SudokuPanel extends JPanel {
         }
     }
 
+    //Xóa một ô đã được điền số
+    public void eraseCurrentCell() {
+        if (currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
+            puzzle.makeSlotEmpty(currentlySelectedRow, currentlySelectedColumn);
+            repaint();
+        }
+    }
+
     public void messageFromNumActionListener(String buttonValue){
         if(currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
             puzzle.makeMove(currentlySelectedRow, currentlySelectedColumn, buttonValue, true);
