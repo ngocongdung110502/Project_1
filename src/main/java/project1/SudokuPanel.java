@@ -92,7 +92,7 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-        Font f = new Font("Times New Roman", Font.PLAIN, fontSize);
+        Font f = new Font("Arial", Font.PLAIN, fontSize);
         graphics2D.setFont(f);
         FontRenderContext fContext = graphics2D.getFontRenderContext();
         for(int row = 0; row < puzzle.getNumRows(); row++){
