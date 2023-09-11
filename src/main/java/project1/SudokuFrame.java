@@ -129,7 +129,7 @@ public class SudokuFrame extends JFrame {
 
         for(String value: generatedPuzzle.getValidValues()){
             JButton button = new JButton(value);
-            button.setPreferredSize(new Dimension(40, 40 ));
+            button.setPreferredSize(new Dimension(45, 45 ));
             button.addActionListener(sudokuPanel.new NumActionListener());
             buttonSelectionPanel.add(button);
         }
