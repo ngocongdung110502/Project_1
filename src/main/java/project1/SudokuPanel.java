@@ -108,6 +108,23 @@ public class SudokuPanel extends JPanel {
             graphics2D.setColor(new Color(0.0f, 0.0f, 1.0f, 0.3f));
             graphics2D.fillRect(currentlySelectedColumn * slotWidth, currentlySelectedRow * slotHeight, slotWidth, slotHeight);
         }
+
+        //Thay đổi màu sắc của chữ số được điền vào ô trống
+        for(int row = 0; row < puzzle.getNumRows(); row++){
+            for(int col = 0; col < puzzle.getNumColumns(); col++){
+                if(!puzzle.isSlotAvailable(row, col) && puzzle.isSlotMutable(row, col)){
+                    // Nếu ô đã được điền, đặt màu sắc tương ứng cho chữ số
+                    graphics2D.setColor(Color.BLUE);
+                } else {
+                    // Nếu không, sử dụng màu sắc mặc định
+                    graphics2D.setColor(Color.BLACK);
+                }
+                // Vẽ chuỗi tại vị trí tương ứng
+                int textWidth = (int) f.getStringBounds(puzzle.getValue(row, col), fContext).getWidth();
+                int textHeight = (int) f.getStringBounds(puzzle.getValue(row, col), fContext).getHeight();
+                graphics2D.drawString(puzzle.getValue(row, col), (col*slotWidth)+((slotWidth/2)-(textWidth/2)), (row*slotHeight)+((slotHeight/2)+(textHeight/2)));
+            }
+        }
     }
 
     public void messageFromNumActionListener(String buttonValue){
