@@ -45,7 +45,6 @@ public class SudokuFrame extends JFrame {
         currentLevel = SudokuLevel.EASY;
 
         JMenuBar menuBar = new JMenuBar();
-//        JMenu file = new JMenu("Game");
         JMenu newGame = new JMenu("New Game");
         JMenuItem sixBySixGame = new JMenuItem("6 By 6 Game");
         sixBySixGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXBYSIX, 30));
@@ -79,12 +78,17 @@ public class SudokuFrame extends JFrame {
         JMenuItem eraseCell = new JMenuItem("Erase");
         eraseCell.addActionListener(new EraseCellListener());
 
-//        file.add(newGame);
-//        file.add(level);
-//        menuBar.add(file);
-        menuBar.add(newGame);
-        menuBar.add(level);
-        menuBar.add(eraseCell);
+        JMenuItem hint = new JMenuItem("Hint");
+        hint.addActionListener(new HintListener());
+
+        JMenu file = new JMenu("Game");
+        file.add(newGame);
+        file.add(level);
+        JMenu file1 = new JMenu("Function");
+        file1.add(eraseCell);
+        file1.add(hint);
+        menuBar.add(file);
+        menuBar.add(file1);
         this.setJMenuBar(menuBar);
 
         JPanel windowPanel = new JPanel();
@@ -157,6 +161,13 @@ public class SudokuFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent event) {
             sudokuPanel.eraseCurrentCell();
+        }
+    }
+
+    public class HintListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            sudokuPanel.showHintForCurrentCell();
         }
     }
 

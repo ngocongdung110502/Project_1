@@ -135,6 +135,13 @@ public class SudokuPanel extends JPanel {
         }
     }
 
+    public void showHintForCurrentCell() {
+        if (currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
+            String hint = puzzle.getHint(currentlySelectedRow, currentlySelectedColumn);
+            JOptionPane.showMessageDialog(null, "Hint: " + hint);
+        }
+    }
+
     public void messageFromNumActionListener(String buttonValue){
         if(currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
             puzzle.makeMove(currentlySelectedRow, currentlySelectedColumn, buttonValue, true);

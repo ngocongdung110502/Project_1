@@ -180,6 +180,18 @@ public class SudokuPuzzle {
         this.board[row][col] = "";
     }
 
+    //Gợi ý khi chọn một ô bất kỳ
+    public String getHint(int row, int col) {
+        if (this.isSlotAvailable(row, col)) {
+            for (String value : this.ValidValues) {
+                if (this.isValidMove(row, col, value)) {
+                    return "A valid value for this cell could be: " + value;
+                }
+            }
+        }
+        return "No hints available for this cell.";
+    }
+
     //Trả về một biểu diễn chuỗi của bảng Sudoku
     //giúp hiện thị bảng trong định dạng văn bản
     @Override
