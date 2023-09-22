@@ -28,16 +28,16 @@ public class SudokuGenerator {
         int numberOfValuesToKeep;
         switch(level){
             case EASY:
-                numberOfValuesToKeep = (int)(0.5 * (copy.getNumRows() * copy.getNumRows()));
+                numberOfValuesToKeep = (int)(0.55 * (copy.getNumRows() * copy.getNumRows()));
                 break;
             case MEDIUM:
-                numberOfValuesToKeep = (int)(0.4 * (copy.getNumRows() * copy.getNumRows()));
+                numberOfValuesToKeep = (int)(0.45 * (copy.getNumRows() * copy.getNumRows()));
                 break;
             case HARD:
-                numberOfValuesToKeep = (int)(0.3 * (copy.getNumRows() * copy.getNumRows()));
+                numberOfValuesToKeep = (int)(0.35 * (copy.getNumRows() * copy.getNumRows()));
                 break;
             case EXPERT:
-                numberOfValuesToKeep = (int)(0.2 * (copy.getNumRows() * copy.getNumRows()));
+                numberOfValuesToKeep = (int)(0.25 * (copy.getNumRows() * copy.getNumRows()));
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Level: " + level);

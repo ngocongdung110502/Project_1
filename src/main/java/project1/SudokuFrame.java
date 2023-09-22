@@ -17,7 +17,7 @@ public class SudokuFrame extends JFrame {
 
     //Số lần gợi ý
     private int hintsUsed = 0;
-    private static final int MAX_HINTS = 5;
+    private static final int MAX_HINTS = 3;
 
     public int calculateFontSize() {
         int baseFontSize;
