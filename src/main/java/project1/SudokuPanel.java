@@ -113,7 +113,7 @@ public class SudokuPanel extends JPanel {
         for(int row = 0; row < puzzle.getNumRows(); row++){
             for(int col = 0; col < puzzle.getNumColumns(); col++){
                 if(!puzzle.isSlotAvailable(row, col) && puzzle.isSlotMutable(row, col)){
-                    // Nếu ô đã được điền, đặt màu sắc tương ứng cho chữ số
+                    // Nếu ô đã được điền đúng, đặt màu sắc tương ứng cho chữ số
                     graphics2D.setColor(Color.BLUE);
                 } else {
                     // Nếu không, sử dụng màu sắc mặc định

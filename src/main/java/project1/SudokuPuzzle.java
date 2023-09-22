@@ -74,6 +74,8 @@ public class SudokuPuzzle {
             this.board[row][col] = value;
             this.mutable[row][col] = isMutable;
         }
+//        this.board[row][col] = value;
+//        this.mutable[row][col] = isMutable;
     }
 
     //Kiểm tra tính hợp lệ của nước đi
