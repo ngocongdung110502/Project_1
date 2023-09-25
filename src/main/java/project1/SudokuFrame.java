@@ -10,6 +10,7 @@ import javax.swing.*;
 public class SudokuFrame extends JFrame {
     private JPanel buttonSelectionPanel;
     private SudokuPanel sudokuPanel;
+    private JLabel wrongAttemptsLabel;
 
     //Các biến để lưu trữ kích thước và mức độ trò chơi hiện tại
     private SudokuPuzzleType currentPuzzleType;
@@ -105,6 +106,9 @@ public class SudokuFrame extends JFrame {
         menuBar.add(file1);
         this.setJMenuBar(menuBar);
 
+        wrongAttemptsLabel = new JLabel("Số lần điền sai: 0");
+        this.add(wrongAttemptsLabel, BorderLayout.SOUTH);
+
         JPanel windowPanel = new JPanel();
         windowPanel.setLayout(new FlowLayout());
         windowPanel.setPreferredSize(new Dimension(800,600));
@@ -112,7 +116,7 @@ public class SudokuFrame extends JFrame {
         buttonSelectionPanel = new JPanel();
         buttonSelectionPanel.setPreferredSize(new Dimension(800, 600));
 
-        sudokuPanel = new SudokuPanel();
+        sudokuPanel = new SudokuPanel(this);
 
         windowPanel.add(sudokuPanel);
         windowPanel.add(buttonSelectionPanel);
@@ -137,6 +141,10 @@ public class SudokuFrame extends JFrame {
         sudokuPanel.repaint();
         buttonSelectionPanel.revalidate();
         buttonSelectionPanel.repaint();
+    }
+
+    public void updateWrongAttempts(int wrongAttempts){
+        wrongAttemptsLabel.setText("Số lần điền sai: " + wrongAttempts);
     }
 
     public class NewGameListener implements ActionListener {

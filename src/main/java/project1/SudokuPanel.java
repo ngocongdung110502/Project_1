@@ -24,6 +24,7 @@ public class SudokuPanel extends JPanel {
 
     private int wrongAttempts = 0;
     private static final int MAX_WRONG_ATTEMPTS = 5;
+    private SudokuFrame frame;
 
     //Constructor
     public SudokuPanel(){
@@ -37,7 +38,8 @@ public class SudokuPanel extends JPanel {
         fontSize = 26;
     }
 
-    public SudokuPanel(SudokuPuzzle puzzle){
+    public SudokuPanel(SudokuFrame frame){
+        this.frame = frame;
         this.setPreferredSize(new Dimension(540,450));
         this.addMouseListener(new SudokuPanelMouseAdapter());
         this.puzzle = puzzle;
@@ -130,9 +132,6 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-//        //Vẽ số lần sai
-//        graphics2D.setColor(Color.RED);
-//        graphics2D.drawString("Số lần điền sai: " + wrongAttempts, 10, 20);
     }
 
     //Xóa một ô đã được điền số
@@ -158,6 +157,7 @@ public class SudokuPanel extends JPanel {
                 repaint();
             }else{
                 wrongAttempts++;
+                frame.updateWrongAttempts(wrongAttempts);
                 if (wrongAttempts >= MAX_WRONG_ATTEMPTS) {
                     int o = JOptionPane.showConfirmDialog(this, "Bạn đã điền sai quá 5 lần. Bạn có muốn chơi lại không?", "Game Over", JOptionPane.YES_NO_OPTION);
                     // Bắt đầu trò chơi mới ở đây
@@ -168,8 +168,6 @@ public class SudokuPanel extends JPanel {
                         // Nếu người dùng chọn "No", thoát khỏi chương trình
                         System.exit(0);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Giá trị bạn điền vào không hợp lệ. Hãy thử lại.");
                 }
             }
 
