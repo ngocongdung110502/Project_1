@@ -22,6 +22,9 @@ public class SudokuPanel extends JPanel {
     //Kích thước khung chữ được sử dụng để hiện thị số trên bảng Sudoku
     private int fontSize;
 
+    private int wrongAttempts = 0;
+    private static final int MAX_WRONG_ATTEMPTS = 5;
+
     //Constructor
     public SudokuPanel(){
         this.setPreferredSize(new Dimension(540, 450));
@@ -119,12 +122,17 @@ public class SudokuPanel extends JPanel {
                     // Nếu không, sử dụng màu sắc mặc định
                     graphics2D.setColor(Color.BLACK);
                 }
+
                 // Vẽ chuỗi tại vị trí tương ứng
                 int textWidth = (int) f.getStringBounds(puzzle.getValue(row, col), fContext).getWidth();
                 int textHeight = (int) f.getStringBounds(puzzle.getValue(row, col), fContext).getHeight();
                 graphics2D.drawString(puzzle.getValue(row, col), (col*slotWidth)+((slotWidth/2)-(textWidth/2)), (row*slotHeight)+((slotHeight/2)+(textHeight/2)));
             }
         }
+
+//        //Vẽ số lần sai
+//        graphics2D.setColor(Color.RED);
+//        graphics2D.drawString("Số lần điền sai: " + wrongAttempts, 10, 20);
     }
 
     //Xóa một ô đã được điền số
@@ -145,8 +153,25 @@ public class SudokuPanel extends JPanel {
 
     public void messageFromNumActionListener(String buttonValue){
         if(currentlySelectedColumn != -1 && currentlySelectedRow != -1) {
-            puzzle.makeMove(currentlySelectedRow, currentlySelectedColumn, buttonValue, true);
-            repaint();
+            if (puzzle.isValidMove(currentlySelectedRow, currentlySelectedColumn, buttonValue)){
+                puzzle.makeMove(currentlySelectedRow, currentlySelectedColumn, buttonValue, true);
+                repaint();
+            }else{
+                wrongAttempts++;
+                if (wrongAttempts >= MAX_WRONG_ATTEMPTS) {
+                    int o = JOptionPane.showConfirmDialog(this, "Bạn đã điền sai quá 5 lần. Bạn có muốn chơi lại không?", "Game Over", JOptionPane.YES_NO_OPTION);
+                    // Bắt đầu trò chơi mới ở đây
+                    if (o == JOptionPane.YES_OPTION) {
+                        // Nếu người dùng chọn "Yes", bắt đầu một trò chơi mới
+                        JOptionPane.showMessageDialog(null, "Để chơi lại vào Game, ấn New Game.");
+                    } else {
+                        // Nếu người dùng chọn "No", thoát khỏi chương trình
+                        System.exit(0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Giá trị bạn điền vào không hợp lệ. Hãy thử lại.");
+                }
+            }
 
             //Kiểm tra xem ô đã đầy chưa
             if (puzzle.boardFull()) {
