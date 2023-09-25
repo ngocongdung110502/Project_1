@@ -20,6 +20,10 @@ public class SudokuFrame extends JFrame {
     private int hintsUsed = 0;
     private static final int MAX_HINTS = 3;
 
+    private JLabel timerLabel;
+    private int secondsPassed = 0;
+    private Timer timer;
+
     public int calculateFontSize() {
         int baseFontSize;
 
@@ -109,6 +113,18 @@ public class SudokuFrame extends JFrame {
         wrongAttemptsLabel = new JLabel("Số lần điền sai: 0");
         this.add(wrongAttemptsLabel, BorderLayout.SOUTH);
 
+        timerLabel = new JLabel("Thời gian: 0 giây");
+        this.add(timerLabel, BorderLayout.NORTH);
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondsPassed++;
+                timerLabel.setText("Thời gian: " + secondsPassed + " giây");
+            }
+        });
+
+
         JPanel windowPanel = new JPanel();
         windowPanel.setLayout(new FlowLayout());
         windowPanel.setPreferredSize(new Dimension(800,600));
@@ -122,7 +138,7 @@ public class SudokuFrame extends JFrame {
         windowPanel.add(buttonSelectionPanel);
         this.add(windowPanel);
 
-        rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, SudokuLevel.EASY);
+        startNewGame();
     }
 
     public void rebuildInterface(SudokuPuzzleType puzzleType, int fontSize, SudokuLevel level){
@@ -143,11 +159,16 @@ public class SudokuFrame extends JFrame {
         buttonSelectionPanel.repaint();
     }
 
+    //Cập nhật số lần điền sai
     public void updateWrongAttempts(int wrongAttempts){
+        wrongAttemptsLabel.setForeground(Color.RED);
         wrongAttemptsLabel.setText("Số lần điền sai: " + wrongAttempts);
     }
 
+    //Bắt đầu lại trò chơi
     public void startNewGame(){
+        secondsPassed = 0;
+        timer.start();
         rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, SudokuLevel.EASY);
     }
 
