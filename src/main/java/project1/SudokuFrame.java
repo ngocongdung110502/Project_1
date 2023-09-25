@@ -147,6 +147,10 @@ public class SudokuFrame extends JFrame {
         wrongAttemptsLabel.setText("Số lần điền sai: " + wrongAttempts);
     }
 
+    public void startNewGame(){
+        rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26, SudokuLevel.EASY);
+    }
+
     public class NewGameListener implements ActionListener {
         private SudokuPuzzleType puzzleType;
         private int fontSize;
