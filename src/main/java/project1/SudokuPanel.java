@@ -163,7 +163,6 @@ public class SudokuPanel extends JPanel {
                     // Bắt đầu trò chơi mới ở đây
                     if (o == JOptionPane.YES_OPTION) {
                         // Nếu người dùng chọn "Yes", bắt đầu một trò chơi mới
-//                        JOptionPane.showMessageDialog(null, "Để chơi lại vào Game, ấn New Game.");
                         frame.startNewGame();
                     } else {
                         // Nếu người dùng chọn "No", thoát khỏi chương trình
@@ -175,10 +174,9 @@ public class SudokuPanel extends JPanel {
             //Kiểm tra xem ô đã đầy chưa
             if (puzzle.boardFull()) {
                 // Hiển thị hộp thoại thông báo
-                int option = JOptionPane.showConfirmDialog(this, "Bảng đã đầy. Bạn có muốn chơi lại không?", "Game Over", JOptionPane.YES_NO_OPTION);
+                int option = JOptionPane.showConfirmDialog(this, "Bảng đã đầy, bạn đã thắng. Bạn có muốn chơi lại không?", "Game Over", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     // Nếu người dùng chọn "Yes", bắt đầu một trò chơi mới
-//                    JOptionPane.showMessageDialog(null, "Để chơi lại vào Game, ấn New Game.");
                     frame.startNewGame();
                 } else {
                     // Nếu người dùng chọn "No", thoát khỏi chương trình
